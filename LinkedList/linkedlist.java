@@ -92,6 +92,16 @@ public class linkedlist {
         head.next=null;
         head = prevnode;
     }
+    public Node reverseRecursive(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node newhead = reverseRecursive(head.next);
+        head.next.next = head;
+        head.next = null;
+
+        return newhead;
+    }
     public static void main(String[] args){
         linkedlist ll = new linkedlist();
         ll.addFirst("c ");
@@ -118,6 +128,9 @@ public class linkedlist {
         System.out.println(ll.size);
 
         ll.iterateList();
+        ll.printLinkedList();
+
+        ll.head = ll.reverseRecursive(ll.head);
         ll.printLinkedList();
     }
 }
