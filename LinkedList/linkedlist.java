@@ -60,21 +60,37 @@ public class linkedlist {
     }
     //delete last
     public void deletelast(){
-       if(head==null){
-           System.out.println("empty");
-           return;
-       }
-       if(head.next==null){
-           head=null;
-       }
-       Node last = head.next;
-       Node secondlast = head;
-       while(last.next!=null){
-           last = last.next;
-           secondlast = secondlast.next;
-       }
-       secondlast.next = null;
-       size--;
+        if(head==null){
+            System.out.println("empty");
+            return;
+        }
+        if(head.next==null){
+            head=null;
+        }
+        Node last = head.next;
+        Node secondlast = head;
+        while(last.next!=null){
+            last = last.next;
+            secondlast = secondlast.next;
+        }
+        secondlast.next = null;
+        size--;
+    }
+    public void iterateList(){
+        if(head==null || head.next==null){
+            return;
+        }
+        Node prevnode = head;
+        Node currentnode = head.next;
+        while(currentnode != null){
+            Node nextnode = currentnode.next;
+            currentnode.next = prevnode;
+
+            prevnode = currentnode;
+            currentnode = nextnode;
+        }
+        head.next=null;
+        head = prevnode;
     }
     public static void main(String[] args){
         linkedlist ll = new linkedlist();
@@ -100,5 +116,8 @@ public class linkedlist {
         ll.addFirst("a");
         ll.addLast("alphabets");
         System.out.println(ll.size);
+
+        ll.iterateList();
+        ll.printLinkedList();
     }
 }
